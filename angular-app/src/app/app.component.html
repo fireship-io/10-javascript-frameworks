@@ -1,0 +1,12 @@
+<ul>
+  <li *ngFor="let todo of todos">{{todo}}</li>
+</ul>
+
+<form (ngSubmit)="addTodo()">
+
+  <!-- Binding -->
+  <input name="todotext" [(ngModel)]="todoText">
+
+  <input type="submit" value="Add Todo">
+
+</form>
