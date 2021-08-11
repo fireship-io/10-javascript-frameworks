@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+ 
+</head>
+<body>
+
+    <div x-data="{ todoText: '' }">
+        
+        <ul x-for="todo in $store.todos">
+            <li x-text="todo"></li>
+        </ul>
+
+        <form x-on:submit.prevent="addTodo(todoText)">
+            <input type="text" x-model="todoText" placeholder="What needs to be done?">
+            <button type="submit">Add Todo</button>
+        </form>
+    </div>
+
+    <script>
+
+        function addTodo(todoText) {
+            Alpine.store('todos').push(todoText);
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+        document.addEventListener('alpine:init', () => {
+            const existingTodos = localStorage.getItem('todos');
+    	    todos = JSON.parse(existingTodos) || [];
+
+            Alpine.store('todos', todos);
+        })
+
+    </script>
+
+    
+</body>
+</html>
