@@ -25,11 +25,11 @@
 
          // Side Effects / Lifecycle
     
-        const existingTodos = JSON.parse(localStorage.getItem('todos'));
+        const existingTodos = JSON.parse(localStorage.getItem('todos')) || [];
 
-        const todoData = existingTodos || [];
+        const todoData = [];
         
-        todoData.forEach(todo => {
+        existingTodos.forEach(todo => {
             addTodo(todo);
         });
 
