@@ -10,47 +10,41 @@
 
     <ul id="todos"></ul>
 
-    <form> 
+    <!-- `return false` is equal to `event.preventDefault()` -->
+    <form onsubmit="addTodo(this.elements.todo.value); this.reset(); return false">
         <input name="todo" type="text">
         <input type="submit" value="Add Todo">
     </form>
 
-
     <script>
+        'use strict'
 
         // Get DOM elements
         const form  = document.querySelector('form');
-        const input = document.querySelector("[name='todo']");
         const todoList = document.getElementById('todos');
 
-         // Side Effects / Lifecycle
-    
+        // Side Effects / Lifecycle
+
         const existingTodos = JSON.parse(localStorage.getItem('todos')) || [];
 
         const todoData = [];
-        
+
         existingTodos.forEach(todo => {
             addTodo(todo);
         });
 
+        function createListElement(text) {
+            const li = document.createElement('li');
+            li.textContent = text; // faster and safer than .innerHTML
+            return li;
+        }
 
         function addTodo(todoText) {
             todoData.push(todoText);
-            const li = document.createElement('li')
-            li.innerHTML = todoText;
-            todoList.appendChild(li);
+            todoList.appendChild(createListElement(todoText));
             localStorage.setItem('todos', JSON.stringify(todoData));
-            input.value = ''
         }
-
-        // Events
-        form.onsubmit = (event) => {
-            event.preventDefault();
-            addTodo(input.value);
-        }
-
-
     </script>
-    
+
 </body>
 </html>
