@@ -1,4 +1,4 @@
-# 10 Framework Comparsion
+# 10 Framework Comparison
 
 Build a simple todo app with...
 
